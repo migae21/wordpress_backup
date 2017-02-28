@@ -13,9 +13,8 @@ DB_HOST="localhost"
 SUB="$(date +"%Y-%m-%d")"
 DEST="/srv/backup/wordpress"
 
-MDB="$DEST/db/$SUB"
-
- 
+MDB="$DEST/db6/$SUB"
+DAYS=6
 function debugecho()
 { 
     if [ ! -z "$DEBUG" ] then echo "$*" fi 
@@ -25,7 +24,7 @@ if [ ! -d $MDB ]
 then
     mkdir -p $MDB ; debugecho "Directory $MDB created." ||  debugecho "Error: Failed to create $MDB directory."
 else
-    debugecho "Error: $MDB directory exits!"
+    debugecho "Error: $mdb directory exits!"
 fi
  
 NOW="$(date +"%Y-%m-%d_%H-%M-%S")"
@@ -41,6 +40,5 @@ do
     debugecho "Backup $FILE.....DONE"
 done
  
-./rotate_backups "-d $DEST" "-s $MDB" "-f *"
-debugecho "rotate Backup invoked"
-rm -f $MDB
+find $DEST/db6/ -maxdepth 1 -type d -mtime +$DAYS -exec echo "Removing Directory => {}" \; -exec rm -rf "{}" \;
+
