@@ -1,11 +1,13 @@
 #!/bin/sh
  
-backup_files="/usr/share/wordpress"
+BACKUP_FILES="/usr/share/wordpress"
+DEST="/srv/wordpress/backup"
+TEMP="/tmp/
  
-dest="/srv/wordpress/backup"
+DAY=$(date +%A)
+HOST=$(hostname -s)
+FILENAME="WP_FILES$HOST-$DAY.tgz"
  
-day=$(date +%A)
-host=$(hostname -s)
-archive_file="$host-$day.tgz"
- 
-tar czf $dest/$archive_file $backup_files
+tar czf $TEMP$FILENAME $BACKUP_FILES
+rotate_backups "-d $DEST" "-s $TEMP" "-f $FILENAME"
+
