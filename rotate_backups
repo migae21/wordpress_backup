@@ -1,37 +1,87 @@
-#!/bin/bash
-# Julius Zaromskis, bspkrs
-# Backup rotation (adapted from http://nicaw.wordpress.com/2013/04/18/bash-backup-rotation-script/)
+#!/bin/sh
 
-# Storage folder where to move backup files
-# Must contain backup.monthly backup.weekly backup.daily folders
-target=$3
+UNSET DEBUG
+#Uncomment the following line to get debuging ouput
+#DEBUG="TRUE"
+UNSET MAIL
+#Uncomment the following line to get a Mail on error
+#MAIL=mig@aon.at
 
-if [ ! -d ${target} ] ; then
-    mkdir ${target}
+function usage()
+{
+    echo "This is my standard Backup rotate script"
+    echo ""
+    echo "./rotate_backups.sh"
+    echo "\t-h --help"
+    echo "\t-d | --dest     = <Destination Directory>"
+    echo "\t-s | --source   = <Source Directory>"
+    echo "\t-f | --filename = <Filename or '*'>"
+    echo ""
+}
+
+function debugecho()
+{ 
+    if [ ! -z "$DEBUG" ] then echo "$*" fi 
+}
+
+while [ "$1" != "" ]; do
+    PARAM=`echo $1 | awk -F= '{print $1}'`
+    VALUE=`echo $1 | awk -F= '{print $2}'`
+    case $PARAM in
+        -h | --help)
+            usage
+            exit
+            ;;
+        -d --dest)
+            DEST=$VALUE
+            ;;
+        # Source folder where files are dumped
+        -s --source)
+            SRC=$VALUE
+            ;;
+        # Source filename (can be wildcarded)
+        -f --filename)
+            FILENAME=$VALUE
+            ;;        
+            
+        *)
+            echo "ERROR: unknown parameter \"$PARAM\""
+            usage
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+debugecho "Source is $SRC";
+debugecho "Destination is $DEST";
+debugecho "Filename is $FILENAME";
+
+
+if [ ! -d ${DEST} ] ; then
+    mkdir ${DEST}
 fi
-if [ ! -d ${target}/backup.monthly ]; then
-    mkdir ${target}/backup.monthly
+if [ ! -d ${DEST}/backup.monthly ]; then
+    mkdir ${DEST}/backup.monthly
 fi
-if [ ! -d ${target}/backup.weekly ]; then
-    mkdir ${target}/backup.weekly
+if [ ! -d ${DEST}/backup.weekly ]; then
+    mkdir ${DEST}/backup.weekly
 fi
-if [ ! -d ${target}/backup.daily ]; then
-    mkdir ${target}/backup.daily
+if [ ! -d ${DEST}/backup.daily ]; then
+    mkdir ${DEST}/backup.daily
 fi
 
-# Source folder where files are dumped
-source=$2
 
-# Source filename (can be wildcarded)
-filename=$1
 
 # Get current month and week day number
 month_day=`date +"%d"`
 week_day=`date +"%u"`
 
+if [ ! -z "MAIL" ] then
 # Optional check if source files exist. Email if failed.
-if [ ! -f ${source}/${filename} ]; then
-    ls -l ${source}/ | mail bspkrs@gmail.com -s "[backup script] Daily backup failed! Please check for missing files."
+    if [ ! -f ${SRC}/${FILENAME} ]; then
+        ls -l ${SRC}/ | mail $MAIL -s "[backup script] Daily backup failed! Please check for missing files."
+    fi
 fi
 
 # It is logical to run this script daily. We take files from source folder and move them to
@@ -39,26 +89,26 @@ fi
 
 # On first month day do
 if [ "$month_day" -eq 1 ]; then
-    destination=${target}/backup.monthly/
+    DESTDIR=${DEST}/backup.monthly/
 else
   # On saturdays do
     if [ "$week_day" -eq 6 ]; then
-        destination=${target}/backup.weekly/
+        DESTDIR=${DEST}/backup.weekly/
     else
     # On any regular day do
-        destination=${target}/backup.daily/
+        DESTDIR=${DEST}/backup.daily/
     fi
 fi
 
 # Move the files
-cp ${source}/$filename ${destination}
+cp ${SRC}/$FILENAME ${destination}
 
 # daily - keep for 30 days
-find ${target}/backup.daily/ -maxdepth 1 -mtime +30 -type d -exec rm -rv {} \;
+find ${DEST}/backup.daily/ -maxdepth 1 -mtime +30 -type d -exec rm -rv {} \;
 
 # weekly - keep for 90 days
-find $target/backup.weekly/ -maxdepth 1 -mtime +90 -type d -exec rm -rv {} \;
+find $DEST/backup.weekly/ -maxdepth 1 -mtime +90 -type d -exec rm -rv {} \;
 
 # monthly - keep for 365 days
-find ${target}/backup.monthly/ -maxdepth 1 -mtime +365 -type d -exec rm -rv {} \;
+find ${DEST}/backup.monthly/ -maxdepth 1 -mtime +365 -type d -exec rm -rv {} \;
 
