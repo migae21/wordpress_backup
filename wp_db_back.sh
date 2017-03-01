@@ -39,6 +39,6 @@ do
     debugecho "Backup $FILE.....DONE"
 done
  
-./rotate_backups -d $DEST -s $MDB -f *
+./rotate_backups -d $DEST -s $MDB -f "$MDB/*"
 debugecho "rotate Backup invoked"
 rm -f $MDB
