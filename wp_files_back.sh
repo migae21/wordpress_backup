@@ -25,7 +25,7 @@ HOST=$(hostname -s)
 FILENAME="WP_FILES$HOST-$DAY.tgz"
  
 tar czf $TEMP$FILENAME $BACKUP_FILES
-./rotate_backups -d $DEST -s $TEMP -f $FILENAME
+./rotate_backups -d=$DEST -s=$TEMP -f=$FILENAME
 debugecho "rotate Backup invoked"
 rm -f $TEMP
 

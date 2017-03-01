@@ -44,6 +44,6 @@ tar cf $TARDIR/$TARFILE $MDB
 
 
  
-./rotate_backups -d $DEST -s $TARDIR -f $TARFILE
+./rotate_backups -d=$DEST -s=$TARDIR -f=$TARFILE
 debugecho "rotate Backup invoked"
 rm -rf $MDB
