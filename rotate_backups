@@ -30,15 +30,15 @@ while [ "$1" != "" ]; do
             usage 
             exit 0
             ;;
-        -d --dest)
+        -d |--dest)
             DEST=$VALUE
             ;;
         # Source folder where files are dumped
-        -s --source)
+        -s |--source)
             SRC=$VALUE
             ;;
         # Source filename (can be wildcarded)
-        -f --filename)
+        -f |--filename)
             FILENAME=$VALUE
             ;;        
             
