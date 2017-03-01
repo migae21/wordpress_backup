@@ -13,9 +13,9 @@ usage ()
     echo ""
     echo "./rotate_backups.sh"
     echo "\t-h --help"
-    echo "\t-d | --dest     = <Destination Directory>"
-    echo "\t-s | --source   = <Source Directory>"
-    echo "\t-f | --filename = <Filename or '*'>"
+    echo "\t-d --dest     = <Destination Directory>"
+    echo "\t-s --source   = <Source Directory>"
+    echo "\t-f --filename = <Filename or '*'>"
     echo ""
 }
 
@@ -30,15 +30,15 @@ while [ "$1" != "" ]; do
             usage 
             exit 0
             ;;
-        -d |--dest)
+        -d | --dest)
             DEST=$VALUE
             ;;
         # Source folder where files are dumped
-        -s |--source)
+        -s | --source)
             SRC=$VALUE
             ;;
         # Source filename (can be wildcarded)
-        -f |--filename)
+        -f | --filename)
             FILENAME=$VALUE
             ;;        
             
