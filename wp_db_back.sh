@@ -4,6 +4,8 @@ unset DEBUG
 #Uncomment the following line to get debuging ouput
 #DEBUG="TRUE"
 
+SCRIPTPATH=`dirname "$0"`/
+
 PATH=/usr/sbin:/sbin:/bin:/usr/bin
  
 DB_USER="wordpress_db_user"
@@ -44,6 +46,6 @@ tar cf $TARDIR/$TARFILE $MDB
 
 
  
-./rotate_backups -d=$DEST -s=$TARDIR -f=$TARFILE
+$SCRIPTPATH/rotate_backups -d=$DEST -s=$TARDIR -f=$TARFILE
 debugecho "rotate Backup invoked"
 rm -rf $MDB

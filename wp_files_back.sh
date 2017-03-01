@@ -3,6 +3,7 @@ unset DEBUG
 #Uncomment the following line to get debuging ouput
 #DEBUG="TRUE"
 
+SCRIPTPATH=`dirname "$0"`/
 #det the path to your install
 BACKUP_FILES="/usr/share/wordpress"
 #Backupdirectory
@@ -25,7 +26,7 @@ HOST=$(hostname -s)
 FILENAME="WP_FILES$HOST-$DAY.tgz"
  
 tar czf $TEMP$FILENAME $BACKUP_FILES
-./rotate_backups -d=$DEST -s=$TEMP -f=$FILENAME
+$SCRIPTPATH/rotate_backups -d=$DEST -s=$TEMP -f=$FILENAME
 debugecho "rotate Backup invoked"
 rm -f $TEMP
 
