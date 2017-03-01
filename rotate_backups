@@ -104,7 +104,7 @@ else
 fi
 
 # Move the files
-cp ${SRC}/$FILENAME ${DEST}
+cp ${SRC}/$FILENAME ${DESTDIR}
 
 # daily - keep for 30 days
 find ${DEST}/backup.daily/ -maxdepth 1 -mtime +30 -type d -exec rm -rv {} \;
