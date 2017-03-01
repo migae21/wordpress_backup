@@ -27,8 +27,8 @@ while [ "$1" != "" ]; do
     VALUE=`echo $1 | awk -F= '{print $2}'`
     case $PARAM in
         -h | --help)
-            usage
-            exit
+            usage 
+            exit 0
             ;;
         -d --dest)
             DEST=$VALUE
