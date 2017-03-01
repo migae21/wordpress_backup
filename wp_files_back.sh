@@ -1,5 +1,5 @@
 #!/bin/sh
-UNSET DEBUG
+unset DEBUG
 #Uncomment the following line to get debuging ouput
 #DEBUG="TRUE"
 
@@ -11,9 +11,7 @@ DEST="/srv/backup/wordpress"
 TEMP=$DEST"/tmp/"
 
 function debugecho()
-{ 
-    if [ ! -z "$DEBUG" ] then echo "$*" fi 
-}
+{ if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
 
 if [ ! -d $TEMP ]
 then

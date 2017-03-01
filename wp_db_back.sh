@@ -1,6 +1,6 @@
 #!/bin/sh
 
-UNSET DEBUG
+unset DEBUG
 #Uncomment the following line to get debuging ouput
 #DEBUG="TRUE"
 
@@ -17,9 +17,7 @@ MDB="$DEST/db/$SUB"
 
  
 function debugecho()
-{ 
-    if [ ! -z "$DEBUG" ] then echo "$*" fi 
-} 
+{ if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
  
 if [ ! -d $MDB ]
 then

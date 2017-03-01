@@ -1,9 +1,9 @@
 #!/bin/sh
 
-UNSET DEBUG
+unset DEBUG
 #Uncomment the following line to get debuging ouput
 #DEBUG="TRUE"
-UNSET MAIL
+unset MAIL
 #Uncomment the following line to get a Mail on error
 #MAIL=mig@aon.at
 
@@ -20,9 +20,7 @@ function usage()
 }
 
 function debugecho()
-{ 
-    if [ ! -z "$DEBUG" ] then echo "$*" fi 
-}
+{ if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
 
 while [ "$1" != "" ]; do
     PARAM=`echo $1 | awk -F= '{print $1}'`

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-UNSET DEBUG
+unset DEBUG
 #Uncomment the following line to get debuging ouput
 #DEBUG="TRUE"
 
@@ -16,9 +16,7 @@ DEST="/srv/backup/wordpress"
 MDB="$DEST/db6/$SUB"
 DAYS=6
 function debugecho()
-{ 
-    if [ ! -z "$DEBUG" ] then echo "$*" fi 
-} 
+{ if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
  
 if [ ! -d $MDB ]
 then
