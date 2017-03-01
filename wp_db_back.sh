@@ -14,7 +14,7 @@ SUB="$(date +"%Y-%m-%d")"
 DEST="/srv/backup/wordpress"
 
 MDB="$DEST/db/$SUB"
-TARDIR="$DEST/db/"
+TARDIR="$DEST/db"
 TARFILE="database.tar"
  
 debugecho ()
@@ -40,10 +40,10 @@ do
     debugecho "Backup $FILE.....DONE"
 done
 
-tar cf $TARDIR$TARFILE $MDB
+tar cf $TARDIR/$TARFILE $MDB
 
 
  
 ./rotate_backups -d $DEST -s $TARDIR -f $TARFILE
 debugecho "rotate Backup invoked"
-rm -f $MDB
+rm -rf $MDB
