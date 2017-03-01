@@ -24,7 +24,7 @@ if [ ! -d $MDB ]
 then
     mkdir -p $MDB ; debugecho "Directory $MDB created." ||  debugecho "Error: Failed to create $MDB directory."
 else
-    debugecho "Error: $mdb directory exits!"
+    debugecho "Error: $MDB directory exits!"
 fi
  
 NOW="$(date +"%Y-%m-%d_%H-%M-%S")"
