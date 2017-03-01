@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 UNSET DEBUG
 #Uncomment the following line to get debuging ouput
