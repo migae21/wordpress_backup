@@ -76,7 +76,7 @@ fi
 month_day=`date +"%d"`
 week_day=`date +"%u"`
 
-if [ ! -z "MAIL" ] then
+if [ ! -z "MAIL" ]; then
 # Optional check if source files exist. Email if failed.
     if [ ! -f ${SRC}/${FILENAME} ]; then
         ls -l ${SRC}/ | mail $MAIL -s "[backup script] Daily backup failed! Please check for missing files."
