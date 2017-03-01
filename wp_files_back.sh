@@ -10,7 +10,7 @@ DEST="/srv/backup/wordpress"
 #temp inside the Backupdirectory
 TEMP=$DEST"/tmp/"
 
-function debugecho()
+debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
 
 if [ ! -d $TEMP ]

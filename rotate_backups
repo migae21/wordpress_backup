@@ -7,7 +7,7 @@ unset MAIL
 #Uncomment the following line to get a Mail on error
 #MAIL=mig@aon.at
 
-function usage()
+usage ()
 {
     echo "This is my standard Backup rotate script"
     echo ""
@@ -19,7 +19,7 @@ function usage()
     echo ""
 }
 
-function debugecho()
+debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
 
 while [ "$1" != "" ]; do

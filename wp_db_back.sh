@@ -16,7 +16,7 @@ DEST="/srv/backup/wordpress"
 MDB="$DEST/db/$SUB"
 
  
-function debugecho()
+debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
  
 if [ ! -d $MDB ]
