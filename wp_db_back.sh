@@ -14,7 +14,8 @@ SUB="$(date +"%Y-%m-%d")"
 DEST="/srv/backup/wordpress"
 
 MDB="$DEST/db/$SUB"
-
+TARDIR="$DEST/db/"
+TARFILE="database.tar"
  
 debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
@@ -38,7 +39,11 @@ do
     mysqldump --single-transaction -u $DB_USER -h $DB_HOST -p$DB_PASS --complete-insert $DB | gzip -9 > $FILE
     debugecho "Backup $FILE.....DONE"
 done
+
+tar cf $TARDIR$TARFILE $MDB
+
+
  
-./rotate_backups -d $DEST -s $MDB -f "$MDB/*"
+./rotate_backups -d $DEST -s $TARDIR -f $TARFILE
 debugecho "rotate Backup invoked"
 rm -f $MDB
