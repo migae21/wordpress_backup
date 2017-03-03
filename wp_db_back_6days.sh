@@ -15,6 +15,7 @@ DEST="/srv/backup/wordpress"
 
 MDB="$DEST/db6/$SUB"
 DAYS=6
+
 debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
  
@@ -33,9 +34,12 @@ DBS="$(mysql -u $DB_USER -h $DB_HOST -p$DB_PASS -Bse 'show databases')"
  
 for DB in $DBS
 do
-    FILE="$MDB/$DB.$NOW.sql.gz"
-    mysqldump --single-transaction -u $DB_USER -h $DB_HOST -p$DB_PASS --complete-insert $DB | gzip -9 > $FILE
-    debugecho "Backup $FILE.....DONE"
+    if [ "$DB" != "information_schema" ] && [ "$DB" != "performance_schema" ] && [ "$DB" != "mysql" ] && [ "$DB" != _* ] ; then
+        debugecho "Dumping database: $db"
+        FILE="$MDB/$DB.$NOW.sql.gz"
+        mysqldump --single-transaction -u $DB_USER -h $DB_HOST -p$DB_PASS --complete-insert --skip-lock-tables $DB | gzip -9 > $FILE
+        debugecho "Backup $FILE.....DONE"
+    fi
 done
  
 find $DEST/db6/ -maxdepth 1 -type d -mtime +$DAYS -exec echo "Removing Directory => {}" \; -exec rm -rf "{}" \;
