@@ -23,7 +23,7 @@ fi
  
 DAY=$(date +%A)
 HOST=$(hostname -s)
-FILENAME="WP_FILES$HOST-$DAY.tgz"
+FILENAME="WP_FILES-$HOST-$DAY.tgz"
  
 tar czf $TEMP$FILENAME $BACKUP_FILES
 $SCRIPTPATH/rotate_backups -d=$DEST -s=$TEMP -f=$FILENAME
