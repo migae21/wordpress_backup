@@ -5,7 +5,6 @@ unset DEBUG
 #DEBUG="TRUE"
 
 SCRIPTPATH=`dirname "$0"`
-
 PATH=/usr/sbin:/sbin:/bin:/usr/bin
  
 DB_USER="wordpress_db_user"

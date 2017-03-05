@@ -27,9 +27,7 @@ else
 fi
  
 NOW="$(date +"%Y-%m-%d_%H-%M-%S")"
- 
 FILE=""
- 
 DBS="$(mysql -u $DB_USER -h $DB_HOST -p$DB_PASS -Bse 'show databases')"
  
 for DB in $DBS

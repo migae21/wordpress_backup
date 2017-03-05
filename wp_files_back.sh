@@ -9,7 +9,7 @@ BACKUP_FILES="/usr/share/wordpress"
 #Backupdirectory
 DEST="/srv/backup/wordpress"
 #temp inside the Backupdirectory
-TEMP=$DEST"/tmp/"
+TEMP="$DEST/tmp/"
 
 debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }

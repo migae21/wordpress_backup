@@ -5,7 +5,7 @@ unset DEBUG
 #DEBUG="TRUE"
 unset MAIL
 #Uncomment the following line to get a Mail on error
-#MAIL=mig@aon.at
+#MAIL=root@localhost
 
 usage ()
 {
