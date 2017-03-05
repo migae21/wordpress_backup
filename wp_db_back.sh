@@ -19,7 +19,7 @@ MDB="$DEST/db/$SUB"
 TARDIR="$DEST/db"
 TARFILE="database.tar"
 NOW="$(date +"%Y-%m-%d_%H-%M-%S")"
-TARFILE=$TARFILE$NOW 
+TARFILE="$TARFILE-$NOW" 
 
 debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }

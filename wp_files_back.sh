@@ -2,8 +2,8 @@
 unset DEBUG
 #Uncomment the following line to get debuging ouput
 #DEBUG="TRUE"
-
-SCRIPTPATH=`dirname "$0"`/
+PATH=/usr/sbin:/sbin:/bin:/usr/bin
+SCRIPTPATH=`dirname "$0"` 
 #det the path to your install
 BACKUP_FILES="/usr/share/wordpress"
 #Backupdirectory
