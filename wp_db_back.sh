@@ -16,9 +16,9 @@ DEST="/srv/backup/wordpress"
 
 MDB="$DEST/db/$SUB"
 TARDIR="$DEST/db"
-TARFILE="database.tar"
-NOW="$(date +"%Y-%m-%d_%H-%M-%S")"
-TARFILE="$TARFILE-$NOW" 
+
+NOW="$(date +"%Y-%m-%d)"
+TARFILE="wordpress-db-${NOW}.tar" 
 
 debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
