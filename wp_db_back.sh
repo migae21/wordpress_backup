@@ -10,14 +10,12 @@ PATH=/usr/sbin:/sbin:/bin:/usr/bin
 DB_USER="wordpress_db_user"
 DB_PASS="wordpress_dp_pass"
 DB_HOST="localhost"
- 
-SUB="$(date +"%Y-%m-%d")"
 DEST="/srv/backup/wordpress"
 
-MDB="$DEST/db/$SUB"
-TARDIR="$DEST/db"
+NOW=$(date +"%Y-%m-%d")
 
-NOW="$(date +"%Y-%m-%d)"
+MDB="$DEST/db/$NOW"
+TARDIR="$DEST/db"
 TARFILE="wordpress-db-${NOW}.tar" 
 
 debugecho ()
