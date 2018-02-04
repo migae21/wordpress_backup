@@ -38,5 +38,17 @@ set
 ```
 BACKUP_FILES="/PATH/to/WORDPRESS"
 in wp_files_back.sh
+
+Ore Use th .wp_config file an place.it in the same directory as the scripts 
+DB_USER="replace with db-user"
+DB_PASS="replace with db-passwd"
+DB_HOST="replace with sql-host, normaly localhost"
+DATABASE="replace with database name"
+#unset DATABASE      #uncomment to backup all th user databases
+DEST="replace with location to save the backup"
+TEMP="$DEST/tmp/"
+
+
+
 ```
 
