@@ -7,10 +7,17 @@ unset DEBUG
 SCRIPTPATH=`dirname "$0"`
 PATH=/usr/sbin:/sbin:/bin:/usr/bin
  
-DB_USER="wordpress_db_user"
-DB_PASS="wordpress_dp_pass"
-DB_HOST="localhost"
+DB_USER="replace with db-user"
+DB_PASS="replace with db-passwd"
+DB_HOST="replace with sql-host, normaly localhost"
+DATABASE="database name"
+#unset DATABASE      #uncomment to backup all th user databases
 DEST="/srv/backup/wordpress"
+
+if [ -r $SCRIPTPATH/.wp_config ]; then
+  echo "Reading user config...." >&2
+  . $SCRIPTPATH/.wp_config
+fi
 
 NOW=$(date +"%Y-%m-%d")
 
@@ -30,7 +37,12 @@ fi
 
 FILE=""
  
-DBS="$(mysql -u $DB_USER -h $DB_HOST -p$DB_PASS -Bse 'show databases')"
+
+if [ -z "$DATABASE" ]; then
+    DBS=$DATABASE
+else
+    DBS="$(mysql -u $DB_USER -h $DB_HOST -p$DB_PASS -Bse 'show databases')"
+fi
  
 for DB in $DBS
 do

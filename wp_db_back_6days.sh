@@ -6,9 +6,18 @@ unset DEBUG
 
 PATH=/usr/sbin:/sbin:/bin:/usr/bin
  
-DB_USER="wordpress_db_user"
-DB_PASS="wordpress_dp_pass"
-DB_HOST="localhost"
+DB_USER="replace with db-user"
+DB_PASS="replace with db-passwd"
+DB_HOST="replace with sql-host, normaly localhost"
+DATABASE="replace with database name"
+#unset DATABASE      #uncomment to backup all th user databases
+DEST="replace with location to save the backup"
+
+if [ -r $SCRIPTPATH/.wp_config ]; then
+  echo "Reading user config...." >&2
+  . $SCRIPTPATH/.wp_config
+fi
+
  
 SUB="$(date +"%Y-%m-%d")"
 DEST="/srv/backup/wordpress"

@@ -11,6 +11,19 @@ DEST="/srv/backup/wordpress"
 #temp inside the Backupdirectory
 TEMP="$DEST/tmp/"
 
+DB_USER="replace with db-user"
+DB_PASS="replace with db-passwd"
+DB_HOST="replace with sql-host, normaly localhost"
+DATABASE="replace with database name"
+#unset DATABASE      #uncomment to backup all th user databases
+DEST="replace with location to save the backup"
+
+if [ -r $SCRIPTPATH/.wp_config ]; then
+  echo "Reading user config...." >&2
+  . $SCRIPTPATH/.wp_config
+fi
+
+
 debugecho ()
 { if [ ! -z "$DEBUG" ]; then echo "$*"; fi }
 
